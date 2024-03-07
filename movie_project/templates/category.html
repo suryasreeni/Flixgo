@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+   {% if category %}
+      {{ category.description|truncatewords:155 }}
+   {% else %}
+       Explore each moment
+   {% endif %}
+{% endblock %}
+{% block title %}
+    {% if category %}
+        {{ category.name }} -  GO
+    {% else %}
+         Enjoy with us - GO
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if category %}
+      <div>
+        <div class="row my_row_class">
+            <div class="mx-auto">
+            <p class="text-center custom_a" ><a href="{% url 'movie_app:allProdCat' %}" class="custom_a" style="color:black;">EXPLORE</a> </p>
+        </div>
+            </div>
+      </div>
+    {% endif %}
+      <div class="mx_auto">
+    {% if category %}
+      </div>
+      <br>
+      <div>
+             <h1 class="text-center my_title" style="color:#DE3163"><b>{{category.name}}</b></h1>
+      </div>
+    {% else %}
+      <div >
+
+      <img src="{% static 'img/banner2.png' %}" class="d-block w-100" style="object-fit: cover; height: 800px;background-color:black;filter: brightness(80%); position:relative;z-index:1;" ;>
+
+    </div>
+
+      </div>
+      <br>
+      <div>
+         <h1 class="text-center my_title" style="color:#DE3163;font-size:80px;">EXPLORE</h1>
+      </div>
+    {% endif %}
+     <div class="container">
+    <div class="row mx-auto">
+        {% for product in products %}
+        <div class="my_bottom_margin col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card text-center border-0" style="width: 300px; height: 320px; box-shadow: 0 0 10px rgba(222, 49, 99, 0.5);">
+                <a href="{{ product.get_url }}">
+                    <img class="card-img-top my_image" src="{{ product.poster.url }}" style="width: 300px; height: 320px;filter: brightness(70%);" alt="{{ product.name }}">
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+         <h1 class="text-center my_title" style="color:#DE3163;font-size:20px;margin-bottom:30px">Thank you for visiting</h1>
+
+      </div>
+
+<br>
+
+{% endblock %}
+

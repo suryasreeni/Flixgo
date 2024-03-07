@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+     body {
+            font-family: 'Arial', sans-serif;
+            background-color: #010101;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #1c1c1c;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color:black;
+        }
+
+        input[type="submit"] {
+            background-color: #DE3163;
+            color:black ;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border:None;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #E4E6EB;
+        }
+
+
+    </style>
+</head>
+<div class="messages" style="margin-bottom: 400px; position: absolute; color: #DE3163; font-size:20px">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="{{ message.tags }}" style="margin-bottom: 5px; padding: 10px;">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+
+<form action="{% url 'authentication:reg' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Enter your UserName" style="color:#DE3163"><br><br>
+    <input type="text" name="first_name" placeholder="Enter your FirstName" style="color:#DE3163"><br><br>
+    <input type="text" name="last_name" placeholder="Enter your LastName" style="color:#DE3163"><br><br>
+    <input type="email" name="email" placeholder="Enter your Email" style="color:#DE3163"><br><br>
+    <input type="password" name="password" placeholder="Enter your Password" style="color:#DE3163"><br><br>
+    <input type="password" name="password1" placeholder="Confirm your password" style="color:#DE3163"><br><br>
+    <input type="submit">
+</form>
+
+</body>
+</html>

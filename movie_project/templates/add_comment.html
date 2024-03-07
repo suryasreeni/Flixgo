@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Comment</title>
+    <style>
+        body {
+            background-color: #111; /* Dark black background */
+            color: #DE3163; /* Text color */
+        }
+
+        h2 {
+            color: #DE3163; /* Heading color */
+        }
+
+        form {
+            background-color: #222; /* Light black field box */
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+        }
+
+        input, textarea {
+            color: #DE3163; /* Input text color */
+            background-color: #333; /* Input background color */
+            border: 1px solid #555; /* Input border color */
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #DE3163; /* Button color */
+            color: #fff; /* Button text color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #BF214B; /* Darker shade on hover */
+        }
+
+    </style>
+</head>
+<body>
+    <form method="post" action="{% url 'movie_app:add_comment' product_id=product.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Comment</button>
+    </form>
+</body>
+</html>

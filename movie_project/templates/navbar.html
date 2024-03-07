@@ -1,0 +1,74 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg" style="background-color:#1c1c1c;height:70px; position:relative ;z-index:2;filter: brightness(150%)">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item dropdown {% if 'movie_app' in request.path %} active {% endif %}">
+    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #DE3163; margin-top: 0px; position: relative;">
+        Category
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #010101; box-shadow: 0 4px 8px rgba(128, 128, 128, 0.3);">
+        <li><a class="dropdown-item" href="{% url 'movie_app:allProdCat' %}" style="color: #DE3163;">All Category</a></li>
+        {% for cat in links %}
+            <li><a class="dropdown-item" href="{{ cat.get_url }}" style="color: #DE3163;">{{ cat.name }}</a></li>
+        {% endfor %}
+    </ul>
+</li>
+
+
+
+            <li>
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown {% if 'movie_app' in request.path %} active {% endif %}">
+    <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #DE3163;">
+        Welcome {{ user.username }}
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#010101; border: none; box-shadow: 0 4px 8px rgba(128, 128, 128, 0.3);">
+        <li><a  class="dropdown-item" href="{% url 'movie_app:add_product' %}"  style="color:#DE3163;">Add Product</a></li>
+
+        {% if user.is_authenticated %}
+                           <li><a class="dropdown-item" href="{% url 'movie_app:edit_profile' %}" style="color:#DE3163;">Edit Profile</a></li>
+        {% endif %}
+        <li><a class="dropdown-item" href="{% url 'authentication:logout' %}" style="color: #DE3163;">Logout</a></li>
+
+    </ul>
+</li>
+
+        </li>
+
+
+
+                {% else %}
+            <li class="nav-item dropdown {% if 'movie_app' in request.path %} active {% endif %}">
+    <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #DE3163;">
+        You can!
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#010101; border: none; box-shadow: 0 4px 8px rgba(128, 128, 128, 0.3);">
+       <li><a  class="dropdown-item" href="{% url 'authentication:reg' %}" style="color:#DE3163">Register</a></li>
+        <li><a  class="dropdown-item" href="{% url 'authentication:login' %}" style="color:#DE3163" >Login</a></li>
+
+    </ul>
+</li>
+
+                {% endif %}
+            </li>
+             <li class="nav-item">
+                 <a href="{% url 'movie_app:allProdCat' %}">
+    <img src="{% static 'img/logo1.png' %}" style="max-height: 120px; max-width:120px; position:absolute; margin-left:400px;margin-top:-40px">
+</a>
+            </li>
+        </ul>
+
+        <form class="d-flex" action="{% url 'search_app:SearchResult' %}" method="get" style="padding: 5px; border-radius: 10px;">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" placeholder="Search" name="q" aria-label="Search" style="background-color: black; color: white; border-color: #DE3163;" autocomplete="off">
+    <button class="btn" type="submit" style="background-color: None"><i class="fa-solid fa-magnifying-glass" style="color: #DE3163;"></i></button>
+</form>
+
+
+    </div>
+</nav>
